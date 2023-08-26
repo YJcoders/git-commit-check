@@ -85,6 +85,19 @@ npm install commitizen -g
 npm install commitizen -D
 ```
 
+2.8、并在 package.json 中添加关联配置
+
+```json
+"scripts": {
+  "commit": "git-cz",
+},
+"config": {
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  }
+}
+```
+
 ### git commit 类型
 
 ```sh

@@ -4,6 +4,7 @@
   "description": "git提交规范约束",
   "main": "index.js",
   "scripts": {
+    "commit": "git-cz",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint-staged": "lint-staged",
@@ -22,6 +23,11 @@
     "commitizen": "^4.3.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,vue}": [
