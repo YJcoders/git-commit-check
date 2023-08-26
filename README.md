@@ -1,3 +1,5 @@
+### 一、如何安装？
+
 ### 需要安装的依赖
 
 husky: 通过 git 的钩子函数，拦截用户的 git commit 和 git push 操作
@@ -5,8 +7,6 @@ commitlint: 校验 git commit 内容
 commitizen: 帮助用户，更快的写出规范的 commit
 
 husky + commitlint 通过 git hook 拦截，校验提交项目的规范，校验用户 commit 信息规范，阻止不规范的提交 push
-
-### 实现步骤
 
 #### 1、安装依赖 husky
 
@@ -89,13 +89,15 @@ module.exports = {
 // revert commit 回退
 ```
 
-2.7、安装 commitizen
+2.7、安装 commitizen cz-customizable
+默认的 cz-conventional-changelog 不支持自定义修改 commitizen 相关配置（比如：修改步骤提示语；跳过不常用的步骤 breaking,footer 等）
+cz-customizable 可以支持自定义配置，但是无法支持，手动输入 scope（变更范围），并且 subject 描述为空也没有拦截掉
 
 ```sh
-# 建议全局安装
+# commitizen 建议全局安装，可以全局使用  git-cz
 npm install commitizen -g
-# 按项目安装
-npm install commitizen -D
+# cz-customizable 按项目安装
+npm install commitizen cz-customizable -D
 ```
 
 2.8、并在 package.json 中添加关联配置
@@ -106,9 +108,30 @@ npm install commitizen -D
 },
 "config": {
   "commitizen": {
-    "path": "cz-conventional-changelog"
+    "path": "./node_modules/cz-customizable"
   }
 }
+```
+
+2.9、如果想修改 cz 的相关配置
+添加 .cz-config.js
+
+```json
+
+```
+
+### 二、如何使用？
+
+```sh
+# 自己写commit
+git add .
+git commit -m 'fix: 修改bug'
+
+# 使用 commitizen 帮助写commit
+git add .
+npm run commit
+# 然后控制台出现 git-cz
+# 安装 git-cz 步骤操作即可
 ```
 
 ### 某次提交，忽略校验
