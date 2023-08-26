@@ -1,0 +1,30 @@
+{
+  "name": "git-commit-check",
+  "version": "1.0.0",
+  "description": "git提交规范约束",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint-staged": "lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "husky",
+    "commitlint",
+    "commitizen"
+  ],
+  "author": "yjcoders",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,vue}": [
+      "prettier --write",
+      "eslint",
+      "git add"
+    ]
+  }
+}
