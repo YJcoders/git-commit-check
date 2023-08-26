@@ -1,11 +1,10 @@
 {
   "name": "git-commit-check",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "git提交规范约束",
   "main": "index.js",
   "scripts": {
-    "commit": "git-cz",
-    "commit1": "git add . && cz-customizable",
+    "commit": "cz-customizable",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint-staged": "lint-staged",
@@ -24,12 +23,8 @@
     "commitizen": "^4.3.0",
     "cz-customizable": "^7.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    }
+    "lint-staged": "^14.0.1",
+    "standard-version": "^9.5.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,vue}": [
