@@ -18,14 +18,15 @@ module.exports = {
     // used if allowCustomScopes is true
     customScope: "请输入修改范围(可选):",
     subject: "请简要描述提交(必填):",
-    // body: "请输入详细描述(可选):",
-    // breaking: "非兼容性说明 (可选):\n",
-    // footer: "请输入要关闭的issue(待优化去除，跳过即可):",
+    body: "请输入详细描述(可选):",
+    breaking: "非兼容性说明 (可选):\n",
+    footer: "关联关闭的issue(可选):",
     confirmCommit: "确认使用以上信息提交？(y/n)",
   },
   scopes: [],
   allowCustomScopes: true,
-  // allowBreakingChanges: ['feat', 'fix'],
+  // 使用breaking
+  // allowBreakingChanges: ["feat", "fix"],
   skipQuestions: ["body", "footer"],
   // limit subject length, commitlint默认是72
   subjectLimit: 72,

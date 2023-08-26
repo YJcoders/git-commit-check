@@ -89,13 +89,14 @@ module.exports = {
 // revert commit 回退
 ```
 
-2.7、安装 commitizen cz-customizable
+2.7、安装 commitizen cz-conventional-changelog
 默认的 cz-conventional-changelog 不支持自定义修改 commitizen 相关配置（比如：修改步骤提示语；跳过不常用的步骤 breaking,footer 等）
-cz-customizable 可以支持自定义配置，但是无法支持，手动输入 scope（变更范围），并且 subject 描述为空也没有拦截掉
 
 ```sh
 # commitizen 建议全局安装，可以全局使用  git-cz
 npm install commitizen -g
+# cz-conventional-changelog  按项目安装
+npm install commitizen cz-conventional-changelog  -D
 # cz-customizable 按项目安装
 npm install commitizen cz-customizable -D
 ```
@@ -108,13 +109,49 @@ npm install commitizen cz-customizable -D
 },
 "config": {
   "commitizen": {
-    "path": "./node_modules/cz-customizable"
+    "path": "cz-conventional-changelog"
   }
 }
 ```
 
-2.9、如果想修改 cz 的相关配置
-添加 .cz-config.js
+使用：
+
+```sh
+# 自己写commit
+git add .
+git commit -m 'fix: 修改bug'
+
+# 使用 commitizen 帮助写commit
+git add .
+npm run commit
+# 然后控制台出现 git-cz
+# 安装 git-cz 步骤操作即可
+# 不支持自定义修改 commitizen 相关配置（比如：修改步骤提示语；跳过不常用的步骤 breaking,footer 等
+```
+
+2.9、如果想自定义 cz 的相关配置， 使用 cz-customizable
+cz-customizable 可以支持自定义配置，但是 subject 为空没有拦截掉, 不支持问题回退
+
+```sh
+# cz-customizable 按项目安装
+npm install cz-customizable -D
+```
+
+修改 package.json 使用配置
+
+```json
+"scripts": {
+  "commit": "cz-customizable",
+},
+// 删除下放的 config 配置
+// "config": {
+//   "commitizen": {
+//     "path": "cz-conventional-changelog"
+//   }
+// }
+```
+
+添加 .cz-config.js 自定义配置
 
 ```json
 
@@ -138,4 +175,20 @@ npm run commit
 
 ```sh
 git commit --no-verify -m "xxx"
+```
+
+### 生成提交记录，提交日志
+
+安装 standard-version
+
+```sh
+npm i standard-version -D
+
+# 执行 生成 CHANGELOG.md 文件
+npx standard-version
+
+# 也可以配置在 package.json 的  script里面
+# "scripts": {
+#   "release": "standard-version",
+# }
 ```
