@@ -2,16 +2,16 @@
 
 husky: 通过 git 的钩子函数，拦截用户的 git commit 和 git push 操作
 commitlint: 校验 git commit 内容
-Commitizen: 帮助用户，更快的写出规范的 commit
+commitizen: 帮助用户，更快的写出规范的 commit
 
 husky + commitlint 通过 git hook 拦截，校验提交项目的规范，校验用户 commit 信息规范，阻止不规范的提交 push
 
 ### 实现步骤
 
-#### 1、安装依赖 husky @commitlint/cli @commitlint/config-conventional
+#### 1、安装依赖 husky
 
 ```sh
-npm i husky @commitlint/cli @commitlint/config-conventional -D
+npm i husky -D
 
 # 卸载 husky 同时要还原 git默认钩子指向
 npm uninstall husky && git config --unset core.hooksPath
@@ -34,10 +34,10 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
 ```
 
 2.2、执行 npm run prepare 添加、启用钩子(创建.husky 文件夹，存放 git hook)
-2.3、添加钩子： npx husky add .husky/pre-commit 'npm run test'
+2.3、添加 pre-commit 钩子： npx husky add .husky/pre-commit 'npm run lint-staged'
 
-1. 添加 pre-commit 钩子，使用 lint-staged 校验 文件内容格式是否符合 eslint
-2. package.json 中配置 lint-staged
+1. 作用：在提交之前，使用 lint-staged 校验 文件内容格式是否符合 eslint
+2. 在 package.json 中配置 lint-staged
 
 ```json
 {
@@ -46,18 +46,44 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,vue}": [
-      "prettier --write",
-      "eslint",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,ts,tsx,json,vue}": ["prettier --write", "eslint", "git add"]
   }
 }
 ```
 
-2.4、添加钩子： 执行 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+2.4、添加 commit-msg 钩子： 执行 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+使用 commitlint 校验 commit 内容是否符合规范
 
-- 添加 commit-msg 钩子，并且使用 commitlint 校验 commit
+2.5、安装 @commitlint/cli @commitlint/config-conventional
+
+```sh
+npm i @commitlint/cli @commitlint/config-conventional -D
+```
+
+2.6、配置 commitlint.config.js 校验 commit 相关配置
+
+```js
+module.exports = {
+  extends: ["@commitlint/config-conventional"],
+  // 检测规则
+  rules: {
+    "type-enum": [
+      2,
+      "always",
+      ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "build"],
+    ],
+  },
+};
+```
+
+2.7、安装 commitizen
+
+```sh
+# 建议全局安装
+npm install commitizen -g
+# 按项目安装
+npm install commitizen -D
+```
 
 ### git commit 类型
 
@@ -73,4 +99,10 @@ build 构建系统或者包依赖更新
 ci CI 配置，脚本文件等更新
 chore 非 src 或者 测试文件的更新
 revert commit 回退
+```
+
+### 某次提交，忽略校验
+
+```sh
+git commit --no-verify -m "xxx"
 ```
