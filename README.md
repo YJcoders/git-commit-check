@@ -90,6 +90,7 @@ module.exports = {
 ```
 
 2.7、安装 commitizen cz-conventional-changelog
+注意： 2.7 和 2.8 选择一个方式安装即可
 默认的 cz-conventional-changelog 不支持自定义修改 commitizen 相关配置（比如：修改步骤提示语；跳过不常用的步骤 breaking,footer 等）
 
 ```sh
@@ -97,11 +98,9 @@ module.exports = {
 npm install commitizen -g
 # cz-conventional-changelog  按项目安装
 npm install commitizen cz-conventional-changelog  -D
-# cz-customizable 按项目安装
-npm install commitizen cz-customizable -D
 ```
 
-2.8、并在 package.json 中添加关联配置
+并在 package.json 中添加关联配置
 
 ```json
 "scripts": {
@@ -129,8 +128,9 @@ npm run commit
 # 不支持自定义修改 commitizen 相关配置（比如：修改步骤提示语；跳过不常用的步骤 breaking,footer 等
 ```
 
-2.9、如果想自定义 cz 的相关配置， 使用 cz-customizable
-cz-customizable 可以支持自定义配置，但是 subject 为空没有拦截掉, 不支持问题回退
+2.8、如果想自定义 cz 的相关配置， 使用 cz-customizable
+cz-customizable 可以支持自定义配置，但是 subject 为空没有拦截掉,
+删除 commitizen 和 cz-conventional-changelog 的依赖
 
 ```sh
 # cz-customizable 按项目安装
@@ -141,14 +141,8 @@ npm install cz-customizable -D
 
 ```json
 "scripts": {
-  "commit": "cz-customizable",
+  "commit": "git add . && cz-customizable",
 },
-// 删除下放的 config 配置
-// "config": {
-//   "commitizen": {
-//     "path": "cz-conventional-changelog"
-//   }
-// }
 ```
 
 添加 .cz-config.js 自定义配置
