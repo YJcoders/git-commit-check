@@ -20,9 +20,11 @@ npm uninstall husky && git config --unset core.hooksPath
 ### 2、添加 git hook
 
 husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 git hook，造成性能浪费；新版本按需使用 hook，将 .git/hook 指向 ./husky 下的 hook 执行)
+
 只需安装需要使用的 hook
 [参考：官方解析](https://blog.typicode.com/husky-git-hooks-autoinstall/)
 [参考：官方文档](https://typicode.github.io/husky/getting-started.html)
+
 2.1、在 package.json 的 scripts 添加 husky install
 
 ```json
@@ -34,10 +36,12 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
 ```
 
 2.2、执行 npm run prepare 添加、启用钩子(创建.husky 文件夹，存放 git hook)
+
 2.3、添加 pre-commit 钩子： npx husky add .husky/pre-commit 'npm run lint-staged'
 
 1. 作用：在提交之前，使用 lint-staged 校验 待提交文件内容格式（本次改动文件）是否符合 eslint
 2. 在 package.json 中配置 lint-staged (先执行 eslint --fix如果有代码错误，直接报错，格式错误先修复，然后再经过prettier格式化)
+
 ```json
 {
   "scripts": {
@@ -52,8 +56,9 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
   }
 }
 ```
+
 3. 解决eslint和prettier冲突：安装最新 eslint-config-prettier eslint-plugin-prettier
-并在 .eslintrc 中 extends 添加 prettier 配置（必须放最后，覆盖前面的规则定义）
+   并在 .eslintrc 中 extends 添加 prettier 配置（必须放最后，覆盖前面的规则定义）
 
 ```sh
 npm i eslint-config-prettier eslint-plugin-prettier -D
@@ -63,7 +68,6 @@ npm i eslint-config-prettier eslint-plugin-prettier -D
 #   extends: ["eslint:recommended", "prettier"],
 # }
 ```
-
 
 2.4、添加 commit-msg 钩子： 执行 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 使用 commitlint 校验 commit 内容是否符合规范
@@ -143,6 +147,7 @@ npm run commit
 ```
 
 2.8、如果想自定义 cz 的相关配置， 使用 cz-customizable
+
 cz-customizable 可以支持自定义配置，但是 subject 为空没有拦截掉,
 删除 commitizen 和 cz-conventional-changelog 的依赖
 
