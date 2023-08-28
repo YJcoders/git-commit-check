@@ -1,5 +1,5 @@
-const a = 3;
+let a = 3;
 
-a = 9;
-
-const aa = "w";
+a = "9";
+console.log(a);
+// const aa = "w";

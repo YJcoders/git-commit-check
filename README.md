@@ -37,8 +37,7 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
 2.3、添加 pre-commit 钩子： npx husky add .husky/pre-commit 'npm run lint-staged'
 
 1. 作用：在提交之前，使用 lint-staged 校验 待提交文件内容格式（本次改动文件）是否符合 eslint
-2. 在 package.json 中配置 lint-staged
-
+2. 在 package.json 中配置 lint-staged (先执行 eslint --fix如果有代码错误，直接报错，格式错误先修复，然后再经过prettier格式化)
 ```json
 {
   "scripts": {
@@ -46,10 +45,25 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,vue}": ["prettier --write", "eslint", "git add"]
+    "src/**/*.{js,jsx,ts,tsx,json,vue}": [
+      "eslint --fix",
+      "prettier --ignor-unknown --cache --write"
+    ]
   }
 }
 ```
+3. 解决eslint和prettier冲突：安装最新 eslint-config-prettier eslint-plugin-prettier
+并在 .eslintrc 中 extends 添加 prettier 配置（必须放最后，覆盖前面的规则定义）
+
+```sh
+npm i eslint-config-prettier eslint-plugin-prettier -D
+
+# 安装之后，.eslintrc 中添加配置
+# {
+#   extends: ["eslint:recommended", "prettier"],
+# }
+```
+
 
 2.4、添加 commit-msg 钩子： 执行 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 使用 commitlint 校验 commit 内容是否符合规范

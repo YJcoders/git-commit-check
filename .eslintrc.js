@@ -5,8 +5,8 @@ module.exports = {
     node: true,
     es6: true,
   },
-  extends: ["eslint:recommended"],
-  // , "plugin:prettier/recommended"
+  extends: ["eslint:recommended", "prettier"],
+  //
   parserOptions: {
     parser: "babel-eslint",
   },
@@ -180,15 +180,7 @@ module.exports = {
       2,
       "always",
       {
-        markers: [
-          "global",
-          "globals",
-          "eslint",
-          "eslint-disable",
-          "*package",
-          "!",
-          ",",
-        ],
+        markers: ["global", "globals", "eslint", "eslint-disable", "*package", "!", ","],
       },
     ],
     "template-curly-spacing": [2, "never"], // 保持模板文字内部空间的一致性-不允许大括号内的空格
