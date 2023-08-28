@@ -36,7 +36,7 @@ husky v6.x 版本起，使用方式有改动(以前版本是添加了所有的 g
 2.2、执行 npm run prepare 添加、启用钩子(创建.husky 文件夹，存放 git hook)
 2.3、添加 pre-commit 钩子： npx husky add .husky/pre-commit 'npm run lint-staged'
 
-1. 作用：在提交之前，使用 lint-staged 校验 文件内容格式是否符合 eslint
+1. 作用：在提交之前，使用 lint-staged 校验 待提交文件内容格式（本次改动文件）是否符合 eslint
 2. 在 package.json 中配置 lint-staged
 
 ```json

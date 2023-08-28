@@ -3,6 +3,7 @@ module.exports = {
   tabSize: 2,
   rangeStart: 0,
   requirePragma: false,
+  indentat: 0,
   insertPragma: false,
   printWidth: 100, // 超过最大值换行
   tabWidth: 2, // 缩进字节数

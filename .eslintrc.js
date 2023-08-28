@@ -5,63 +5,15 @@ module.exports = {
     node: true,
     es6: true,
   },
-  extends: ["plugin:vue/essential", "eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:prettier/recommended"],
   parserOptions: {
     parser: "babel-eslint",
   },
   rules: {
-    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }], //将标签渲染为原生html标签时，由于这些标签是自闭合的，所以有end标签会报错,忽略此问题
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    "vue/attribute-hyphenation": 0, // 忽略属性连字
-    "vue/order-in-components": [0], // 忽略vue生命周期排序
-    "vue/attributes-order": [
-      // 属性顺序
-      "error",
-      {
-        order: [
-          "DEFINITION",
-          "LIST_RENDERING",
-          "CONDITIONALS",
-          "RENDER_MODIFIERS",
-          "GLOBAL",
-          ["UNIQUE", "SLOT"],
-          "TWO_WAY_BINDING",
-          "OTHER_DIRECTIVES",
-          "OTHER_ATTR",
-          "EVENTS",
-          "CONTENT",
-          // DEFINITION e.g. 'is', 'v-is'
-          // LIST_RENDERING e.g. 'v-for item in items'
-          // CONDITIONALS e.g. 'v-if', 'v-else-if', 'v-else', 'v-show', 'v-cloak'
-          // RENDER_MODIFIERS e.g. 'v-once', 'v-pre'
-          // GLOBAL e.g. 'id'
-          // UNIQUE e.g. 'ref', 'key'
-          // SLOT e.g. 'v-slot', 'slot'.
-          // TWO_WAY_BINDING e.g. 'v-model'
-          // OTHER_DIRECTIVES e.g. 'v-custom-directive'
-          // OTHER_ATTR e.g. 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
-          // EVENTS e.g. '@click="functionCall"', 'v-on="event"'
-          // CONTENT e.g. 'v-text', 'v-html'
-        ],
-        alphabetical: false,
-      },
-    ],
-    "vue/singleline-html-element-content-newline": "off", // 在单行元素的内容前后需要换行符
-    "vue/multiline-html-element-content-newline": "off", // 在多行元素的内容之前和之后需要换行符
-    "vue/name-property-casing": ["error", "PascalCase"], // JS/JSX中的组件名应该始终是帕斯卡命名法
-    "vue/no-v-html": "off",
-    "vue/prop-name-casing": [1, "camelCase"], // 在声明prop的时候，其命名应该始终使用驼峰命名
-    "vue/require-v-for-key": 1, // 给v-for设置键值，与key结合使用，可以高效的更新虚拟DOM
-    "vue/no-use-v-if-with-v-for": [
-      // 不要把 v-if 和 v-for 用在同一个元素上——因为v-for 比 v-if 具有更高的优先级
-      2,
-      {
-        allowUsingIterationVar: false,
-      },
-    ],
     quotes: [
-      //使用双引号
+      // 使用双引号
       "error",
       "double",
       {
@@ -69,36 +21,12 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
-    semi: [2, "always"], //使用分号结尾
+    semi: [2, "always"], // 使用分号结尾
     "semi-spacing": [
       2,
       {
         before: false,
         after: true,
-      },
-    ],
-    "vue/html-self-closing": [
-      // 标签闭合
-      "error",
-      {
-        html: {
-          void: "always",
-          normal: "never",
-          component: "always",
-        },
-        svg: "always",
-        math: "always",
-      },
-    ],
-    "vue/max-attributes-per-line": [
-      // 多个特性的元素应该分多行撰写，每个特性一行
-      2,
-      {
-        singleline: 5,
-        multiline: {
-          max: 1,
-          allowFirstLine: false,
-        },
       },
     ],
     "accessor-pairs": 2, // 定义对象的set存取器属性时，强制定义get
